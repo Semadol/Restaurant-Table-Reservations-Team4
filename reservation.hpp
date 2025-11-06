@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include "utils/utility.cpp"
 
 using namespace std;
 
@@ -15,8 +16,10 @@ class Reservation {
 		string dni = "";
 		string date = "";
 		Reservation* next = nullptr;
-		
-		Reservation(int table, int qty, string name, string dni, string date);
+			
+		Reservation() {}  //Implementacion de metodos constructores
+		Reservation(int table, int qty, string name, string dni, string date) 
+             : table(table), qty(qty), name(name), dni(dni), date(date), next(nullptr) {}
 	
 	friend class Reservations;
 };
@@ -26,5 +29,12 @@ class Reservations {
 	
 	private:
 		Reservation* first;
-		
+	
+	public:
+		Reservations();
+		void setFirst(Reservation* p);
+		Reservation* getFirst();
+		bool full();
+		bool checkReservationData(int table, int qty, string name, string dni, string date);
+		bool createReservation(int table, int qty, string name, string dni, string date);
 };
