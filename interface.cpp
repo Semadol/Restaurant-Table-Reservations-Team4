@@ -71,13 +71,15 @@ void CmdInterface::processChoice(int choice) {
 			break;
 		case 4: //updateReservations
             int searchTable, mesa, cantPersonas;
-            string searchDate nombre, cedula, dia;
+            string searchDate, nombre, cedula, dia;
             char continueVar = 's';
+            Reservations list1;
 
             while(continueVar == 's' || continueVar == 'S') {
                 cout << "Ingrese la mesa y el día de la reservacion a actualizar";
                 getline(cin, searchTable);
                 getline(cin, searchDate);
+                resultSearch = Reservation*;
                 resultSearch = list1.findReservationByDate(searchTable, searchDate);
                 if(resultSearch == nullptr) {
                     cout << "La reservacion buscada no existe" << endl;
@@ -103,6 +105,7 @@ void CmdInterface::processChoice(int choice) {
                 getline(cin, nombre);
                 cout << "Cantidad de personas para la reserva: ";
                 cin >> cantPersonas;
+                bool resultUpdate;
                 resultUpdate = list1.updateReservation(resultSearch, mesa, dia, cedula, nombre, cantPersonas);
                 if (resultUpdate == false) {
                     cout << "Surgio un error con los datos, ¿desea volver a intentar? (s/n)";
@@ -121,6 +124,7 @@ void CmdInterface::processChoice(int choice) {
             char continueVar = 's';
             int mesa;
             string dia;
+            Reservations list1;
 
             while (continueVar == 's' || continueVar == 'S') {
                 cout << "Ingrese la mesa de la reservacion: ";
