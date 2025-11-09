@@ -86,7 +86,7 @@ bool Reservations::updateReservation(Reservation* ptr, int table, int qty, strin
     if(!checkReservationData(table, qty, name, dni, date)) {
         return false; // Update values are not valid
     }
-    if(findReservation(table, date) != nullptr) {
+    if(findReservationByDate(table, date) != nullptr) {
         return false; // A reservation already exists
     }
     Reservation* p = ptr;
