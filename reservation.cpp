@@ -119,9 +119,7 @@ bool Reservations::deleteReservation(Reservation* ptr, Reservations& cancelledLi
 		}
 	}
 	old = ptr;
-	// debug here
 	p->next = ptr->getNext();
-	cout << "Hola";
 	cancelledList.createReservation(ptr->getTable(), ptr->getQty(), ptr->getName(), ptr->getDni(), ptr->getDate());
     delete old;
     return true;

@@ -268,7 +268,12 @@ void CmdInterface::processChoice(int choice) {
                 }
                 cout << "Reservacion cancelada exitosamente" << endl;
                 Reservation* puntero = cancelledList.getFirst();
-                cout << "Reservacion cancelada: " << puntero->getTable() << ". Del dia: " << puntero->getDate() << endl;
+                cout << "Reservacion cancelada: mesa: [" << puntero->getTable() << "]. Del dia: " << puntero->getDate() << endl;
+                cout << "------------------------------" << endl;
+		    	cout << "Presione ENTER para continuar...";
+		    	cin.ignore();
+		    	string _tmp;
+		    	getline(cin, _tmp);
                 break;
             }
 			break;
