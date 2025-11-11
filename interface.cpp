@@ -192,12 +192,57 @@ void CmdInterface::processChoice(int choice) {
 		        break;
 		    }
 		
+<<<<<<< HEAD
 		    cout << "----- Reporte de Reservas por Dia -----" << endl;
 		    mostrarReservasPorDia(list1, "lunes");
 		    mostrarReservasPorDia(list1, "martes");
 		    mostrarReservasPorDia(list1, "miercoles");
 		    mostrarReservasPorDia(list1, "jueves");
 		    mostrarReservasPorDia(list1, "viernes");
+=======
+		    // Primer recorrido: Contar reservas por dia
+		    int lunes = 0, martes = 0, miercoles = 0, jueves = 0, viernes = 0;
+		    p = list1.getFirst();
+		    while (p != nullptr) {
+		        string dia = toLower(p->getDate());
+		        if (dia == "lunes") ++lunes;
+		        else if (dia == "martes") ++martes;
+		        else if (dia == "miercoles" || dia == "miércoles") ++miercoles;
+		        else if (dia == "jueves") ++jueves;
+		        else if (dia == "viernes") ++viernes;
+		        p = p->getNext();
+		    }
+		
+		    // Mostrar cantidad de Reservas por dia
+		    cout << "----- Reporte de Reservas por Dia -----" << endl;
+		    cout << "Lunes:     " << lunes << endl;
+		    cout << "Martes:    " << martes << endl;
+		    cout << "Miércoles: " << miercoles << endl;
+		    cout << "Jueves:    " << jueves << endl;
+		    cout << "Viernes:   " << viernes << endl;
+		    cout << "---------------------------------------" << endl;
+		
+		    // Segundo recorrido: imprimir reservas por día
+		    string dias[] = {"lunes", "martes", "miercoles", "miércoles", "jueves", "viernes"};
+		    for (int d = 0; d < 5; ++d) {
+		        string diaActual = dias[d];
+		        cout << "--- Reservas para " << capitalize(diaActual) << " ---" << endl;
+		
+		        p = list1.getFirst();
+		        while (p != nullptr) {
+		            string dia = toLower(p->getDate());
+		            if (dia == diaActual || (diaActual == "miercoles" && dia == "miércoles")) {
+		                cout << "Numero de mesa: " << p->getTable() << endl;
+		                cout << "Nombre del cliente: " << p->getName() << endl;
+		                cout << "Cedula del cliente: " << p->getDni() << endl;
+		                cout << "Dia de la reserva: " << p->getDate() << endl;
+		                cout << "Cantidad de personas: " << p->getQty() << endl;
+		                cout << "------------------------------" << endl;
+		            }
+		            p = p->getNext();
+		        }
+		    }
+>>>>>>> LogicElimination
 		
 		    cout << "Presione ENTER para continuar...";
 		    string _tmp; getline(cin, _tmp);
@@ -206,6 +251,7 @@ void CmdInterface::processChoice(int choice) {
 
 
 		case 6: {
+			// Cancelar Reservaciones
 			char continueVar = 's';
             int mesa;
             string dia;
@@ -222,7 +268,7 @@ void CmdInterface::processChoice(int choice) {
                 cout << "¿Seguro que desea proseguir con la cancelacion? (s/n) ";
                 cin >> continueVar;
                 if (continueVar == 's' || continueVar == 'S') {
-                	resultDelete = list1.deleteReservation(resultSearch);
+                	resultDelete = list1.deleteReservation(resultSearch, cancelledList);
 				} else {
 					break;
 				}
@@ -235,6 +281,13 @@ void CmdInterface::processChoice(int choice) {
                     continue;
                 }
                 cout << "Reservacion cancelada exitosamente" << endl;
+                Reservation* puntero = cancelledList.getFirst();
+                cout << "Reservacion cancelada: mesa: [" << puntero->getTable() << "]. Del dia: " << puntero->getDate() << endl;
+                cout << "------------------------------" << endl;
+		    	cout << "Presione ENTER para continuar...";
+		    	cin.ignore();
+		    	string _tmp;
+		    	getline(cin, _tmp);
                 break;
             }
 			break;
