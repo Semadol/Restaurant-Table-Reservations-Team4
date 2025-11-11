@@ -50,7 +50,7 @@ class Reservations {
 		bool checkReservationData(int table, int qty, string name, string dni, string date);
 		bool createReservation(int table, int qty, string name, string dni, string date);
 		bool updateReservation(Reservation* ptr, int table, int qty, string name, string dni, string date);
-		bool deleteReservation(Reservation* ptr, Reservations& cancelledList);
+		bool deleteReservation(Reservation* ptr);
 		
 		// Verifica si Lista esta vacia
 		bool isEmpty();
